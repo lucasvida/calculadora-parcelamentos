@@ -9,14 +9,23 @@ Principais Objetivos
 */
 
 // Declarações de variáveis globais.
-
 const form = document.querySelector("form");
 const valor = document.querySelector("#valor");
 const parcela = document.querySelector("#parcelas");
 const resultado = document.querySelector(".resultado");
 const inputs = document.querySelectorAll("input");
-let campoVazio = false; //Declara variável do tipo boleano.
 let formataReal; //Declara variável Global do tipo indefinida.
+
+//Função para exibir alertas de erro.
+function alerta(erro) {
+  const alertPopUp = document.querySelector("#alertErro");
+  alertPopUp.style.display = "block";
+  alertPopUp.classList.add("animate__fadeInDown");
+  alertPopUp.innerHTML = erro;
+  setTimeout(() => {
+    alertPopUp.style.display = "none";
+  }, 4000);
+}
 
 //Formata moeda em Real ao digitar.
 function formatarMoeda(e) {
@@ -49,56 +58,33 @@ form.addEventListener("submit", (e) => {
     formataReal = valor.value.replace(",", ".").replace(".", "");
   }
 
-  //Percorre todos os inputs, emitindo um alerta e colocando o foco no último vazio.
+  //Percorre todos os inputs, emitindo um alerta e colocando o foco no último em caso de vazio vazio.
   for (let i of inputs) {
     if (i.value === "") {
       alerta(`Campo ${i.name} não pode ser vazio`);
       i.focus();
-      campoVazio = true;
+    } else if (parseInt(parcela.value) >= 13) {
+      alerta(`Máximo de Parcelas é 12x`);
+    } else if (formataReal < 100) {
+      alerta(`Valor mínimo da compra R$100,00`);
     } else {
-      campoVazio = false;
-    }
-  }
-  //Verifica se a quantidade de Parcelas é maior do que 12.
-  if (parcela.value >= 13) {
-    alerta(`Máximo de Parcelas é 12x`);
-    campoVazio = true;
-  } else {
-    campoVazio = false;
-  }
-  //Verifica se o valor mínimo da compra é R$100,00
-  if (formataReal < 100) {
-    alerta(`Valor mínimo da compra R$100,00`);
-    campoVazio = true;
-  } else {
-    campoVazio = false;
-  }
-
-  //Função para exibir alertas de erro.
-  function alerta(erro) {
-    const alertPopUp = document.querySelector("#alertErro");
-    alertPopUp.style.display = "block";
-    alertPopUp.classList.add("animate__fadeInDown");
-    alertPopUp.innerHTML = erro;
-    setTimeout(() => {
-      alertPopUp.style.display = "none";
-    }, 2000);
-  }
-
-  //Verifica se ainda existe campo vazio, caso não, executa o cálculo das Parcelas.
-  if (campoVazio === false) {
-    //Limpa qualquer valor já exibido antes.
-    resultado.innerHTML = "";
-    //Usa um For para exibir os valores da parcela, usando LocaleString para formatar.
-    for (let i = 1; i <= parcela.value; i++) {
-      let valorParcela = parseFloat(formataReal) / parseInt(i);
-      let newP = document.createElement("p");
-      newP.classList.add("listagem-parcelas");
-      newP.innerHTML = `Em até ${i}x <br><span class='sem-juros'>sem juros</span><br>de ${valorParcela.toLocaleString(
-        "pt-BR",
-        { style: "currency", currency: "BRL" }
-      )}`;
-      resultado.appendChild(newP);
+      divideCompra();
     }
   }
 });
+
+function divideCompra() {
+  //Limpa qualquer valor já exibido antes.
+  resultado.innerHTML = "";
+  //Usa um FOR para exibir os valores da parcela, usando LocaleString para formatar.
+  for (let i = 1; i <= parcela.value; i++) {
+    let valorParcela = parseFloat(formataReal) / parseInt(i);
+    let newP = document.createElement("p");
+    newP.classList.add("listagem-parcelas");
+    newP.innerHTML = `Em até ${i}x <br><span class='sem-juros'>sem juros</span><br>de ${valorParcela.toLocaleString(
+      "pt-BR",
+      { style: "currency", currency: "BRL" }
+    )}`;
+    resultado.appendChild(newP);
+  }
+}

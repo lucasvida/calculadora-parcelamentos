@@ -19,8 +19,8 @@
             top: 10px;
             right: 10px;
             border-radius: 5px;
-            background-color: rgba(110, 1, 19, 0.082);
-            color: rgb(180, 0, 45);
+            background-color:#991b1b;
+            color: #FFF;
             padding: 20px;
             transition: 1s;
         }
