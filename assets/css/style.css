@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;1,600&display=swap');
+
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
+        :root {
+            --bg-color: #f7f9fa;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--bg-color);
+        }
+
+        #alertErro {
+            display: none;
+            width: 200px;
+            text-align: center;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            border-radius: 5px;
+            background-color: rgba(110, 1, 19, 0.082);
+            color: rgb(180, 0, 45);
+            padding: 20px;
+            transition: 1s;
+        }
+
+        @layer principal {
+
+            .container {
+                width: 95%;
+                margin: 0 auto;
+            }
+
+            .container h1 {
+                text-align: center;
+            }
+
+            .formulario {
+                display: flex;
+                justify-content: center;
+                margin-top: 35px;
+            }
+
+            .formulario form {
+                width: 25%;
+                box-shadow: 0px 0px 0px rgba(58, 0, 77, 0.1),
+                    0px 3px 15px rgba(58, 0, 77, 0.1),
+                    0px 5px 30px rgba(58, 0, 77, 0.1),
+                    0px 8px 44px rgba(58, 0, 77, 0.1),
+                    0px 10px 59px rgba(58, 0, 77, 0.1),
+                    0px 13px 74px rgba(58, 0, 77, 0.1);
+                padding: 50px;
+
+            }
+
+            .input {
+                padding: 5px;
+            }
+
+            .input:nth-child(2) {
+                margin-top: 15px;
+                padding: 5px;
+            }
+
+            .buttons {
+                margin-top: 15px;
+                padding: 5px;
+            }
+
+            label {
+                margin: 5px;
+                font-size: 0.75em;
+            }
+
+            input {
+                width: 95%;
+                height: 35px;
+                border-radius: 10px;
+                border: solid 2px lightblue;
+                margin-top: 5px;
+                padding: 10px;
+            }
+
+            .calcular {
+                width: 100%;
+                background-color: orangered;
+                font-size: 1.2em;
+                font-weight: 400;
+                color: aliceblue;
+                padding: 15px;
+                border-radius: 5px;
+                cursor: pointer;
+                border: 0;
+                text-align: center;
+            }
+
+            .reset {
+                width: 100%;
+                font-size: 0.75em;
+                font-weight: bold;
+                color: rgb(1, 82, 153);
+                background-color: #d8eef9;
+                padding: 10px;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-top: 5px;
+                border: 0;
+                text-align: center;
+            }
+
+            input[type=text]::placeholder {
+                color: rgba(0, 70, 144, 0.749);
+            }
+
+            input[type=text]:focus {
+                border: 3px solid rgb(4, 106, 196);
+                ;
+            }
+
+            .resultado {
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+                margin-top: 75px;
+            }
+
+            .listagem-parcelas{
+                width: 15%;
+                height: 50px;
+                border-radius: 5px;
+                box-shadow: 0px 0px 0px rgba(58, 0, 77, 0.1),
+                0px 3px 15px rgba(58, 0, 77, 0.1);
+                padding: 15px;
+                font-size: 0.85em;
+                text-align: center;
+            }
+
+            .sem-juros{
+                color:green;
+                font-weight: bold;
+                font-size: 1.2em;
+            }
+
+
+        }
+
+        @media screen and (max-width:600px){
+            .container{
+                width:100%;
+            }
+            .formulario form {
+                width: 100%;
+                padding: 10px;
+            }
+            .input{
+                width:93%;
+            }
+            .resultado {
+                display: flex;
+                align-items: center;
+                justify-content:center;
+                flex-wrap: wrap;
+                margin-top: 25px;
+            }
+            .listagem-parcelas{
+                width: 40%;
+                height: 50px;
+                border-radius: 5px;
+                box-shadow: 0px 0px 0px rgba(58, 0, 77, 0.1),
+                0px 3px 15px rgba(58, 0, 77, 0.1);
+                padding: 15px;
+                font-size: 0.85em;
+            }
+        }
